@@ -1,0 +1,20 @@
+rule all:
+	input:
+		"../results/C.txt"
+
+rule produceAB:
+	output:
+		"../results/A.txt",
+		"../results/B.txt"
+	shell:
+		"date > {output}"
+
+rule produceCFromAB:
+	input:
+		"../results/A.txt",
+		"../results/B.txt",
+	output:
+		"../results/C.txt"
+	shell:
+		"cat {input} {output}"
+
