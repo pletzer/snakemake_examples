@@ -1,0 +1,18 @@
+rule all:
+	input:
+		"../results/B.txt"
+
+rule produceA:
+	output:
+		"../results/A.txt"
+	shell:
+		"touch {output}"
+
+rule produceBFromA:
+	input:
+		"../results/A.txt"
+	output:
+		"../results/B.txt"
+	shell:
+		"cp {input} {output}"
+

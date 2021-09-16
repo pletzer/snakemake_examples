@@ -1,0 +1,31 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job              count    min threads    max threads
+-------------  -------  -------------  -------------
+all                  1              1              1
+produceA             1              1              1
+produceBFromA        1              1              1
+total                3              1              1
+
+Select jobs to execute...
+
+[Fri Sep 17 08:43:32 2021]
+rule produceA:
+    output: ../results/simple/A.txt
+    jobid: 2
+    resources: tmpdir=/var/folders/9n/xdj7z1gd3ps96j4nqzgkfd1h0000gq/T
+
+[Fri Sep 17 08:43:32 2021]
+Error in rule produceA:
+    jobid: 2
+    output: ../results/simple/A.txt
+    shell:
+        touch 
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /Users/pletzera/snakemake_examples/simple/workflow/.snakemake/log/2021-09-17T084331.810266.snakemake.log
