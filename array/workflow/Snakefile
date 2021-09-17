@@ -1,0 +1,21 @@
+from glob import glob
+
+rule all:
+	input:
+		"../results/sum.txt"
+
+rule add:
+	input:
+		glob("../data/mydata_*.txt")
+	output:
+		"../results/sum.txt"
+	run:
+		res = 0
+		for filename in input:
+			with open(filename) as f:
+				n = int(f.read())
+				res += n
+		with open(output[0], 'w') as out:
+			out.write(f'{res}\n')
+
+
