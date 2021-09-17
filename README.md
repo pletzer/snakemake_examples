@@ -12,11 +12,18 @@ pip install -r requirements.txt
 
 ## Running the examples
 
+Checkout out the code:
+```
+git clone https://github.com/pletzer/snakemake_examples
+cd snakemake_examples
+export SNAKEMAKE_EXAMPLES=$(pwd)
+```
+
 ### Simple example
 
-From the top directory, start with 
+Start with 
 ```
-cd simple/workflow
+cd $SNAKEMAKE_EXAMPLES/simple/workflow
 rm -rf ../results/*
 ```
 
@@ -39,9 +46,9 @@ This will produce files `../results/A.txt` and `../results/B.txt`. Note that rem
 
 ### Example with file C depending on A and B
 
-From the top directory, start with 
+Start with 
 ```
-cd triad/workflow
+cd $SNAKEMAKE_EXAMPLES/triad/workflow
 rm -rf ../results/*
 ```
 then run
@@ -53,11 +60,11 @@ Check that you can remove file `../results/A.txt` and rerun `snakemake -j1`. How
 
 ### Example showing how to aggregate many files into one
 
-Many statistical operations involve extracting data from many files and extracting a single number from them. 
+Many statistical operations involve combining data from many files into a single number. 
 
-From the top directory, start with 
+Start with 
 ```
-cd array/workflow
+cd $SNAKEMAKE_EXAMPLES/array/workflow
 rm -rf ../results/*
 ```
 then run
