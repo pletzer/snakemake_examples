@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 ### Simple example
 
-Start with 
+From the top directory, start with 
 ```
 cd simple/workflow
 rm -rf ../results/*
@@ -36,4 +36,20 @@ snakemake -j1
 ```
 
 This will produce files `../results/A.txt` and `../results/B.txt`. Note that removing `rm ../results/B.txt` and rerunning `snakemake -j1` will recreate `B.txt` but not `A.txt`
+
+### Example with file C depending on A and B
+
+From the top directory, start with 
+```
+cd triad/workflow
+rm -rf ../results/*
+```
+then run
+```
+snakemake -j1
+```
+
+Check that you can remove file `../results/A.txt` and rerun `snakemake -j1`. However, this will not recreate `A.txt` as the final product `C.txt` is still present. On the other hand, `rm ../results/{A,C}.txt` and then running `snakemake -j1` will recreate `A.txt` and `C.txt`, but not `B.txt` since this file was already present.
+
+
 

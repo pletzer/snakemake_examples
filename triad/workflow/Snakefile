@@ -2,10 +2,15 @@ rule all:
 	input:
 		"../results/C.txt"
 
-rule produceAB:
+rule produceA:
 	output:
 		"../results/A.txt",
-		"../results/B.txt"
+	shell:
+		"date > {output}"
+
+rule produceB:
+	output:
+		"../results/B.txt",
 	shell:
 		"date > {output}"
 
@@ -16,5 +21,5 @@ rule produceCFromAB:
 	output:
 		"../results/C.txt"
 	shell:
-		"cat {input} {output}"
+		"cat {input} > {output}"
 
