@@ -51,5 +51,18 @@ snakemake -j1
 
 Check that you can remove file `../results/A.txt` and rerun `snakemake -j1`. However, this will not recreate `A.txt` as the final product `C.txt` is still present. On the other hand, `rm ../results/{A,C}.txt` and then running `snakemake -j1` will recreate `A.txt` and `C.txt`, but not `B.txt` since this file was already present.
 
+### Example showing how to aggregate many files into one
+
+Many statistical operations involve extracting data from many files and extracting a single number from them. 
+
+From the top directory, start with 
+```
+cd array/workflow
+rm -rf ../results/*
+```
+then run
+```
+snakemake -j1
+```
 
 
