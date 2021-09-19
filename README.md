@@ -45,9 +45,31 @@ cd $SNAKEMAKE_EXAMPLES
 pip install -r requirements.txt
 ```
 
-### Simple example
+### A simple example
 
-Start with 
+In this simple example, there is no input file, just a rule `produceA` that creates a file `../results/A.txt` and a rule `produceBFromA` that copies the (empty)file `../results/A.txt` to `../results/B.txt`. The `Snakefile` file looks like:
+```
+rule all:
+	input:
+		"../results/B.txt"
+
+rule produceA:
+	output:
+		"../results/A.txt"
+	shell:
+		"touch {output}"
+
+rule produceBFromA:
+	input:
+		"../results/A.txt"
+	output:
+		"../results/B.txt"
+	shell:
+		"cp {input} {output}"
+```
+Note the final rule `all`, which checks whether the result file `../results/B.txt` and does not produce anything. This final task is akin a manager checking that the work is complete. 
+
+To run the example, 
 ```
 cd $SNAKEMAKE_EXAMPLES/simple/workflow
 rm -rf ../results/*
