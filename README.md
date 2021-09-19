@@ -47,7 +47,12 @@ pip install -r requirements.txt
 
 ### A simple example
 
-In this simple example, there is no input file, just a rule `produceA` that creates a file `../results/A.txt` and a rule `produceBFromA` that copies the (empty) file `../results/A.txt` to `../results/B.txt`. The `Snakefile` file looks like:
+In this simple example, there is no input file, just a rule `produceA` that creates a file `../results/A.txt` and a rule `produceBFromA` that copies the (empty) file `../results/A.txt` to `../results/B.txt`. 
+
+[Dependency rule](../images/simple/workflow.png)
+
+
+The `Snakefile` file looks like:
 ```
 rule all:
 	input:
@@ -67,7 +72,7 @@ rule produceBFromA:
 	shell:
 		"cp {input} {output}"
 ```
-Note the final rule `all`, which checks whether the result file `../results/B.txt` and does not produce anything. This final task is akin a manager checking that the work is complete. 
+Note the final rule `all`, which checks the result file `../results/B.txt` and does not produce anything. This final task is akin a manager checking that the work is complete. 
 
 To run the example, 
 ```
