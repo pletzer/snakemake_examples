@@ -1,5 +1,18 @@
 # snakemake_examples
-Showing how to use snakemake to generate a workflow
+
+This repository provides examples of how Snakemake can be used to generate a workflow. A workflow takes a number of input files and produces output files.
+
+## How Snakemake works
+
+Snakemake requires a `Snakefile`, which embodies all the rules to generate the output files from the input files. Note that the rules can cascade, that is the output files may depend on some intermediate files, which may depend on some other, temporary files and so on. A rule is a essentially a task that takes some input files and produces output files. Snakemake is lazy in that tasks will only be executed if necessary. For instance, if some but not all output files exist then only the tasks reuquired to generate the missing output files will be executed.
+
+## Cheking out the code
+
+```
+git clone https://github.com/pletzer/snakemake_examples
+cd snakemake_examples
+export SNAKEMAKE_EXAMPLES=$(pwd)
+```
 
 ## Installing dependencies
 
@@ -7,16 +20,8 @@ After installing Miniconda or Anaconda:
 ```
 conda create -n snakeenv python=3.8
 conda activate snakeenv
+cd $SNAKEMAKE_EXAMPLES
 pip install -r requirements.txt
-```
-
-## Running the examples
-
-Checkout out the code:
-```
-git clone https://github.com/pletzer/snakemake_examples
-cd snakemake_examples
-export SNAKEMAKE_EXAMPLES=$(pwd)
 ```
 
 ### Simple example
