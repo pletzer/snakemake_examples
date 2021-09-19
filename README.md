@@ -97,9 +97,11 @@ snakemake -j1
 
 This will produce files `../results/A.txt` and `../results/B.txt`. Note that removing `rm ../results/B.txt` and rerunning `snakemake -j1` will recreate `B.txt` but not `A.txt`
 
-### Example with file C.txt depending on A.txt and B.txt
+### Example with a more complex dependency
 
-
+The next example
+![Rules](https://github.com/pletzer/snakemake_examples/blob/main/images/triad/worflow.png)
+involves a final result `C.txt` that depends on two files, `A.txt` and `B.txt`
 
 Start with 
 ```
