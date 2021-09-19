@@ -171,6 +171,14 @@ snakemake -j1
 Check that the sum, `cat ../results/sum.txt` is `4950`. 
 
 
+### Example showing how to submit the tasks to a SLURM sheduler
 
+When tasks take a long time to execute, it is time to run each task on a supercomputer. In this example, we'll rerun the tasks under SLURM, the scheduler on NeSI's mahuika platform. 
+
+```
+cd $SNAKEMAKE_EXAMPLES/array/workflow
+rm -rf ../results/*
+snakemake --cluster "sbatch --time=00:01:00 --ntasks=1 --cpus-per-task=1" --jobs=1
+```
 
 
