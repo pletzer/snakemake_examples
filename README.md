@@ -49,7 +49,7 @@ pip install -r requirements.txt
 
 In this simple example, there is no input file, just a rule `produceA` that creates a file `../results/A.txt` and a rule `produceBFromA` that copies the (empty) file `../results/A.txt` to `../results/B.txt`. 
 
-https://github.com/pletzer/snakemake_examples/blob/main/images/simple/worflow.png
+![Rules](https://github.com/pletzer/snakemake_examples/blob/main/images/simple/worflow.png)
 
 
 The `Snakefile` file looks like:
