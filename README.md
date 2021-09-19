@@ -34,8 +34,8 @@ On mahuika, it suffices to
 ml snakemake
 ```
 
-To install Snakemake on a personal computer, we recommend installing Miniconda [https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html]. 
-Install scripts exist for Windows, Mac OS X and Linux. Once you have Miniconda installed, type:
+To install Snakemake on a personal computer, we recommend installing Miniconda3 [https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html]. 
+Install scripts exist for Windows, Mac OS X and Linux. Once you have Miniconda3 installed, type:
 ```
 conda create -n snakeenv python=3.8
 conda activate snakeenv
