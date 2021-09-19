@@ -47,7 +47,7 @@ pip install -r requirements.txt
 
 ### A simple example
 
-In this simple example, there is no input file, just a rule `produceA` that creates a file `../results/A.txt` and a rule `produceBFromA` that copies the (empty)file `../results/A.txt` to `../results/B.txt`. The `Snakefile` file looks like:
+In this simple example, there is no input file, just a rule `produceA` that creates a file `../results/A.txt` and a rule `produceBFromA` that copies the (empty) file `../results/A.txt` to `../results/B.txt`. The `Snakefile` file looks like:
 ```
 rule all:
 	input:
