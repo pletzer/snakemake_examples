@@ -100,8 +100,8 @@ This will produce files `../results/A.txt` and `../results/B.txt`. Note that rem
 ### Example with a more complex dependency
 
 The next example
-![Rules](https://github.com/pletzer/snakemake_examples/blob/main/images/triad/worflow.png)
-involves a final result `C.txt` that depends on two files, `A.txt` and `B.txt`
+![Rules](https://github.com/pletzer/snakemake_examples/blob/main/images/triad/workflow.png)
+involves a final result `C.txt` that depends on two files, `A.txt` and `B.txt`, with `B.txt` depending on `A.txt`.
 
 Start with 
 ```
