@@ -80,24 +80,26 @@ cd $SNAKEMAKE_EXAMPLES/simple/workflow
 rm -rf ../results/*
 ```
 
-Checking whether there are syntax errors in Snakemake
+Let's see what the workflow looks like, without actually running it:
 ```
 snakemake -j1 --dryrun
 ```
 
-Producing a dependency graph:
+A nice way to visualise the workflow:
 ```
-snakemake --dag | dot -Tpng > simple.png
+snakemake --dag | dot -Tpng > workflow.png
 ```
 
-Running the workflow:
+Now that we're happy with the workflow, let's run it:
 ```
 snakemake -j1
 ```
 
 This will produce files `../results/A.txt` and `../results/B.txt`. Note that removing `rm ../results/B.txt` and rerunning `snakemake -j1` will recreate `B.txt` but not `A.txt`
 
-### Example with file C depending on A and B
+### Example with file C.txt depending on A.txt and B.txt
+
+
 
 Start with 
 ```
