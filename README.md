@@ -4,7 +4,9 @@ This repository provides examples of how Snakemake can be used to generate a wor
 
 ## How Snakemake works
 
-Snakemake requires a `Snakefile`, which embodies all the rules to generate the output files from the input files. Note that the rules can cascade, that is the output files may depend on some intermediate files, which may depend on some other, temporary files and so on. A rule is a essentially a task that takes some input files and produces output files. Snakemake is lazy in that tasks will only be executed if necessary. For instance, if some but not all output files exist then only the tasks reuquired to generate the missing output files will be executed.
+Snakemake requires a `Snakefile`, which embodies all the rules to generate the output files from the input files. Note that the rules can cascade, that is the output files may depend on some intermediate files, which may depend on some other, temporary files and so on. A rule is a essentially a task that takes some input files and produces output files. 
+
+Snakemake is lazy in that tasks will only be executed if necessary. For instance, if some but not all output files exist then only the tasks reuquired to generate the missing output files will be executed.
 
 In all the examples below, the directory structure is
 ```
@@ -34,7 +36,7 @@ On mahuika, it suffices to
 ml snakemake
 ```
 
-To install Snakemake on a personal computer, we recommend installing Miniconda3 [https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html]. 
+To install Snakemake on a personal computer, we recommend installing (Miniconda3)[https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html]. 
 Install scripts exist for Windows, Mac OS X and Linux. Once you have Miniconda3 installed, type:
 ```
 conda create -n snakeenv python=3.8
