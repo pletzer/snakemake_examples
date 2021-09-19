@@ -6,6 +6,19 @@ This repository provides examples of how Snakemake can be used to generate a wor
 
 Snakemake requires a `Snakefile`, which embodies all the rules to generate the output files from the input files. Note that the rules can cascade, that is the output files may depend on some intermediate files, which may depend on some other, temporary files and so on. A rule is a essentially a task that takes some input files and produces output files. Snakemake is lazy in that tasks will only be executed if necessary. For instance, if some but not all output files exist then only the tasks reuquired to generate the missing output files will be executed.
 
+In all the examples below, the directory structure is
+```
+<example>/
+├── data
+│   ├── mydata_0.txt
+│   ├── ...
+├── results
+└── workflow
+    ├── Snakefile
+```
+The `Snakefile` is stored under workflow. The inout files are under `data/` and the output files will be stored under `results/`. The `snakemake` command will be executed under `workflow/`, at the same level as `Snakefile`.
+
+
 ## Cheking out the code
 
 ```
