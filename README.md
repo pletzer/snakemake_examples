@@ -85,10 +85,13 @@ Let's see what the workflow looks like, without actually running it:
 snakemake -j1 --dryrun
 ```
 
+Option `-j1` tells Snakemake to run on one core. Workflows can be compute intensive and it may be beneficial to run on more than one core in such cases.
+
 A nice way to visualise the workflow:
 ```
 snakemake --dag | dot -Tpng > workflow.png
 ```
+The above requires the program `dot` to be installed.
 
 Now that we're happy with the workflow, let's run it:
 ```
@@ -113,20 +116,61 @@ then run
 snakemake -j1
 ```
 
-Check that you can remove file `../results/A.txt` and rerun `snakemake -j1`. However, this will not recreate `A.txt` as the final product `C.txt` is still present. On the other hand, `rm ../results/{A,C}.txt` and then running `snakemake -j1` will recreate `A.txt` and `C.txt`, but not `B.txt` since this file was already present.
+Try to remove file `../results/A.txt` and then rerun `snakemake -j1`. Note that this will not recreate `A.txt` as the final product `C.txt` is still present. 
+
+Try to remove `../results/{A,C}.txt` and then re-run `snakemake -j1`. This will generate `A.txt` and `C.txt`, but not `B.txt` since this file was already present.
 
 ### Example showing how to aggregate many files into one
 
-Many statistical operations involve combining data from many files into a single number. 
+Statistical operations often involve combining data from many files into a single number. In this example, we start with 100 files, each containing a number which we want to sum up. Although the addition step can be performed in bash, we'll implement it in Python. Snakemake understands Python, we'll program the rules in Python.
 
 Start with 
 ```
 cd $SNAKEMAKE_EXAMPLES/array/workflow
-rm -rf ../results/*
 ```
-then run
+The 100 input data files are under `../data`:
 ```
+mydata_0.txt
+mydata_1.txt
+...
+mydata_99.txt
+```
+
+File `Snakefile`:
+```Python
+# import the Python glob module
+from glob import glob
+
+rule all:
+	input:
+		# the single output file that will contain the sum
+		"../results/sum.txt"
+
+rule add:
+	input:
+		# the input files each contain a number
+		glob("../data/mydata_*.txt")
+	output:
+		"../results/sum.txt"
+	run:
+		# add the number in the input files using Python code
+		res = 0 # stores the sum
+		for filename in input: # input is a list of file names
+			with open(filename) as f: # open each file
+				n = int(f.read()) # read the content of the file
+				res += n # increment the sum
+		with open(output[0], 'w') as out: # write out the result
+			out.write(f'{res}\n')
+```
+
+To run the workflow, type:
+```
+rm -rf ../results/*s
 snakemake -j1
 ```
+Check that the sum, `cat ../results/sum.txt` is `4950`. 
+
+
+
 
 

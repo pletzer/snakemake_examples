@@ -1,21 +1,25 @@
+# import the Python glob module
 from glob import glob
 
 rule all:
 	input:
+		# the single output file that will contain the sum
 		"../results/sum.txt"
 
 rule add:
 	input:
+		# the input files each contain a number
 		glob("../data/mydata_*.txt")
 	output:
 		"../results/sum.txt"
 	run:
-		res = 0
-		for filename in input:
-			with open(filename) as f:
-				n = int(f.read())
-				res += n
-		with open(output[0], 'w') as out:
+		# add the number in the input files using Python code
+		res = 0 # stores the sum
+		for filename in input: # input is a list of file names
+			with open(filename) as f: # open each file
+				n = int(f.read()) # read the content of the file
+				res += n # increment the sum
+		with open(output[0], 'w') as out: # write out the result
 			out.write(f'{res}\n')
 
 
