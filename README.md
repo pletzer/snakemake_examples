@@ -193,8 +193,7 @@ cd $SNAKEMAKE_EXAMPLES/parallel/workflow
 In this example we count the number of times the word "the" appears in variour text files. At the end we generate a table listing the number of "the" words in each file:
 ![Rules](https://github.com/pletzer/snakemake_examples/blob/main/images/parallel/workflow.png)
 
-Note that the counting can be executed in parallel -- there is no interdependency between counting the word in one file and counting the same work in another file. Thus, we have a mechanism for executing jobs concurrently. The number of simultaneously running jobs is set by the `--jobs` option. Even though we have three files, here we have decide to allow two jobs to run concurrently:
-
+Note that rule `countWord` can be executed independently by different jobs. With Snakemake, we have a mechanism for executing jobs concurrently, which reduces the turnaround time. The number of simultaneously running jobs is set by the `--jobs` option. Even though we have three files, here we have decide to allow only two jobs to run concurrently below:
 ```
 snakemake --cluster "sbatch --time=00:01:00 --ntasks=1 --cpus-per-task=1" --jobs=2
 ```
