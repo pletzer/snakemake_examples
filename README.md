@@ -91,7 +91,8 @@ A nice way to visualise the workflow:
 ```
 snakemake --dag | dot -Tpng > workflow.png
 ```
-The above requires the program `dot` to be installed.
+The above requires the program `dot` to be installed. Dag stands for "directed acylcic graph". In other words the workflow cannot have circular dependencies 
+where input depends on the output and output depends in the input.
 
 Now that we're happy with the workflow, let's run it:
 ```
@@ -180,10 +181,23 @@ cd $SNAKEMAKE_EXAMPLES/array/workflow
 rm -rf ../results/*
 snakemake --cluster "sbatch --time=00:01:00 --ntasks=1 --cpus-per-task=1" --jobs=1
 ```
-where `sbatch` is the command to submit a job under SLURM with the other options allocating resources.
+where `sbatch` is the command to submit a job under SLURM with the other options allocating resources (see [Slurm: reference sheet](https://support.nesi.org.nz/hc/en-gb/articles/360000691716-Slurm-Reference-Sheet) for more info).
 
 ### Example of a parallel workflow
 
+Start with
+```
+cd $SNAKEMAKE_EXAMPLES/parallel/workflow
+```
+
+In this example we count the number of times the word "the" appears in variour text files. At the end we generate a table listing the number of "the" words in each file:
+![Rules](https://github.com/pletzer/snakemake_examples/blob/main/images/parallel/workflow.png)
+
+Note that the counting can be executed in parallel -- there is no interdependency between counting the word in one file and counting the same work in another file. Thus, we have a mechanism for executing jobs concurrently. The number of simultaneously running jobs is set by the `--jobs` option. Even though we have three files, here we have decide to allow two jobs to run concurrently:
+
+```
+snakemake --cluster "sbatch --time=00:01:00 --ntasks=1 --cpus-per-task=1" --jobs=2
+```
 
 
 

@@ -10,6 +10,7 @@ rule summary:
 	output:
 		"../results/summary.csv"
 	run:
+		# find the number of occurrences of a word in a text 
 		with open(output[0], 'w') as fout:
 			fout.write('filename,count\n')
 			for filename in input:
@@ -17,13 +18,13 @@ rule summary:
 					n = int(f.read()) # read the content of the file
 					fout.write(f'{n}\n')
 
-
 rule countWord:
 	input:
 		"../data/text{index}.txt"
 	output:
 		"../results/counts{index}.txt"
 	shell:
+		# find all occurrences of word 'the'
 		"grep -woi the {input} | wc -l > {output}"
 
 
