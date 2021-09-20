@@ -1,0 +1,29 @@
+INDICES = [str(i) for i in range(1, 3+1)]
+
+rule all:
+	input:
+		"../results/summary.csv"
+
+rule summary:
+	input:
+		expand(f"../results/counts{index}.txt" for index in INDICES)
+	output:
+		"../results/summary.csv"
+	run:
+		with open(output[0], 'w') as fout:
+			fout.write('filename,count\n')
+			for filename in input:
+				with open(filename) as f: # open each file
+					n = int(f.read()) # read the content of the file
+					fout.write(f'{n}\n')
+
+
+rule countWord:
+	input:
+		"../data/text{index}.txt"
+	output:
+		"../results/counts{index}.txt"
+	shell:
+		"grep -woi the {input} | wc -l > {output}"
+
+
