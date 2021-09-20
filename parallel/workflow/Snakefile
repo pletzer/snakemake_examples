@@ -1,3 +1,4 @@
+# list all the text{iindex}.txt files
 INDICES = [str(i) for i in range(1, 3+1)]
 
 rule all:
@@ -6,6 +7,7 @@ rule all:
 
 rule summary:
 	input:
+		# creates a list ["../results/counts1.txt", "../results/counts2.txt",...]
 		expand(f"../results/counts{index}.txt" for index in INDICES)
 	output:
 		"../results/summary.csv"
@@ -24,7 +26,7 @@ rule countWord:
 	output:
 		"../results/counts{index}.txt"
 	shell:
-		# find all occurrences of word 'the'
+		# find all occurrences of the word 'the'
 		"grep -woi the {input} | wc -l > {output}"
 
 
