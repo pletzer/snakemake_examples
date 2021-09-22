@@ -1,18 +1,21 @@
+A = "../results/A.txt"
+B = "../results/B.txt"
+
 rule all:
 	input:
-		"../results/B.txt"
+		B
 
 rule produceA:
 	output:
-		"../results/A.txt"
+		A
 	shell:
 		"touch {output}"
 
 rule produceBFromA:
 	input:
-		"../results/A.txt"
+		A
 	output:
-		"../results/B.txt"
+		B
 	shell:
 		"cp {input} {output}"
 

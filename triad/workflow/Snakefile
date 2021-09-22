@@ -1,29 +1,32 @@
+A = "../results/A.txt"
+B = "../results/B.txt"
+C = "../results/C.txt"
+
 rule all:
-	input:
-		"../results/C.txt",
+    input:
+        C,
 
 rule produceA:
-	output:
-		"../results/A.txt",
-	shell:
-		'echo "10" > {output}'
+    output:
+        A,
+    shell:
+        'echo "10" > {output}'
 
 rule produceBFromA:
-	input:
-		"../results/A.txt",
-	output:
-		"../results/B.txt",
-	shell:
-	    # add 1 to the number in A.txt
-		'echo $(($(cat {input}) + 1)) > {output}'
+    input:
+        A,
+    output:
+        B,
+    shell:
+        # add 1 to the number in A.txt
+        'echo $(($(cat {input}) + 1)) > {output}'
 
 rule produceCFromAB:
-	input:
-		"../results/A.txt",
-		"../results/B.txt",
-	output:
-		"../results/C.txt",
-	shell:
-	    # concatenate the contents of A.txt and B.txt
-		"cat {input} > {output}"
+    input:
+        A, B
+    output:
+        C,
+    shell:
+        # concatenate the contents of A and B into C
+        "cat {input} > {output}"
 
