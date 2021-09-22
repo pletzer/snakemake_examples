@@ -36,8 +36,7 @@ On mahuika, it suffices to
 ml snakemake
 ```
 
-To install Snakemake on a personal computer, we recommend installing [Miniconda3](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html). 
-Install scripts exist for Windows, Mac OS X and Linux. Once you have Miniconda3 installed, type:
+To run Snakemake on a personal computer (Windows, Mac OS X and Linux), we recommend installing [Miniconda3](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html). Once you have Miniconda3 installed, type:
 ```
 conda create -n snakeenv python=3.8
 conda activate snakeenv
@@ -54,25 +53,28 @@ In this simple example, there is no input file, just a rule `produceA` that crea
 
 The `Snakefile` file looks like:
 ```
+A = "../results/A.txt"
+B = "../results/B.txt"
+
 rule all:
 	input:
-		"../results/B.txt"
+		B
 
 rule produceA:
 	output:
-		"../results/A.txt"
+		A
 	shell:
 		"touch {output}"
 
 rule produceBFromA:
 	input:
-		"../results/A.txt"
+		A
 	output:
-		"../results/B.txt"
+		B
 	shell:
 		"cp {input} {output}"
 ```
-Note the final rule `all`, which checks the result file `../results/B.txt` and does not produce anything. This final task is akin a manager checking that the work is complete. 
+Note the final rule `all`, which checks that the result file `../results/B.txt` has been created, this rule not produce anything. This final task is akin a manager checking that the work is complete. 
 
 To run the example, 
 ```
@@ -142,10 +144,12 @@ File `Snakefile`:
 # import the Python glob module
 from glob import glob
 
+SUM_FILE = "../results/sum.txt"
+
 rule all:
 	input:
 		# the single output file that will contain the sum
-		"../results/sum.txt"
+		SUM_FILE
 
 rule add:
 	input:
@@ -157,10 +161,14 @@ rule add:
 		# add the number in the input files using Python code
 		res = 0 # stores the sum
 		for filename in input: # input is a list of file names
-			with open(filename) as f: # open each file
-				n = int(f.read()) # read the content of the file
-				res += n # increment the sum
-		with open(output[0], 'w') as out: # write out the result
+			# open each file
+			with open(filename) as f:
+				# read the content of the file
+				n = int(f.read())
+				# increment the sum
+				res += n
+		# write out the result
+		with open(output[0], 'w') as out:
 			out.write(f'{res}\n')
 ```
 
